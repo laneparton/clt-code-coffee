@@ -1,0 +1,32 @@
+---
+const { compact = false, class: className = '' } = Astro.props;
+---
+{compact ? (
+  <span class={className}>
+    <img class="light-mark" src="/brand/03-compact-mark-light.svg" width="476" height="476" alt="Charlotte Code & Coffee" />
+    <img class="dark-mark" src="/brand/03-compact-mark-dark.svg" width="476" height="476" alt="Charlotte Code & Coffee" />
+  </span>
+) : (
+  <span class:list={['header-brand', className]}>
+    <svg class="mug" viewBox="0 0 106 94" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 30 H72 V64 Q72 83 54 83 H31 Q13 83 13 64 Z M72 40 H82 Q101 40 94 59 Q89 69 74 67" stroke="currentColor" stroke-width="5" />
+      <path d="M28 20 Q17 11 29 3 M50 20 Q39 11 51 3" stroke="var(--purple)" stroke-width="5" />
+      <path d="M30 52 L39 60 L30 68 M49 68 H62" stroke="var(--pink)" stroke-width="4" />
+    </svg>
+    <span class="name"><span class="city">Charlotte</span><span class="name-line"><span class="code">Code</span> <span class="amp">&amp;</span> Coffee</span></span>
+  </span>
+)}
+
+<style>
+  .light-mark{display:none!important}
+  @media(prefers-color-scheme:light){:global(html:not([data-theme=dark])) .light-mark{display:block!important}:global(html:not([data-theme=dark])) .dark-mark{display:none!important}}
+  :global(html[data-theme=light]) .light-mark{display:block!important}
+  :global(html[data-theme=light]) .dark-mark{display:none!important}
+  .header-brand{display:flex;align-items:center;gap:12px;color:var(--text);font-family:var(--mono)}
+  .mug{width:43px;height:43px;flex:none}
+  .name{display:flex;flex-direction:column;gap:5px;line-height:1.1}
+  .city{font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+  .name-line{font-size:21px;font-weight:700;white-space:nowrap;letter-spacing:-.6px}
+  .code{color:var(--pink)}.amp{color:var(--purple)}
+  @media(max-width:700px){.header-brand{gap:8px}.mug{width:34px;height:38px}.name-line{font-size:17px}.city{font-size:13px;letter-spacing:1px}}
+</style>

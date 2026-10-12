@@ -1,0 +1,18 @@
+---
+import { timeLabel } from '../data/schedule.js';
+const { entry, timezone } = Astro.props;
+const date = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'long', month: 'short', day: 'numeric' })
+  .format(new Date(`${entry.date}T12:00:00Z`));
+---
+<article class:list={['schedule-entry', { 'break-entry': entry.kind === 'break' }]} data-date={entry.date}>
+  <div class="event-when">
+    <time datetime={entry.date}>{date}</time>
+    {entry.kind === 'coffee' && <p class="event-time">{timeLabel(entry, timezone)}</p>}
+  </div>
+  {entry.kind === 'break' ? <div class="break-note"><h3>{entry.title}</h3><p>No coffee this Friday. {entry.message}</p></div> :
+    <div class="event-place">
+      <h3>{entry.cafe ?? 'Café to be announced'}</h3>
+      {entry.address && <p class="event-address">{entry.address}</p>}
+      {entry.mapUrl && <a class="event-map button" href={entry.mapUrl}>Open the map <span aria-hidden="true">↗</span></a>}
+    </div>}
+</article>
