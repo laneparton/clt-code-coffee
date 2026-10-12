@@ -5,8 +5,10 @@ const { config } = Astro.props;
 const entries = scheduleEntries(config);
 const now = new Date();
 const active = entries.filter(entry => entry.end > now);
-const featured = active.find(entry => entry.kind === 'coffee');
-const remaining = active.filter(entry => entry !== featured);
+// Show four Fridays total, counting coffee listings and breaks.
+const visible = active.slice(0, 4);
+const featured = visible.find(entry => entry.kind === 'coffee');
+const remaining = visible.filter(entry => entry !== featured);
 const signature = active.map(entry => entry.date).join(',');
 ---
 <div class="coffee-schedule" data-signature={signature}>
@@ -46,11 +48,12 @@ const signature = active.map(entry => entry.date).join(',');
       const active = templates.filter(template => Date.parse(template.dataset.end!) > now);
       const signature = active.map(template => template.dataset.date).join(',');
       if (signature !== root.dataset.signature) {
-        const featured = active.find(template => template.dataset.kind === 'coffee');
+        const visible = active.slice(0, 4);
+        const featured = visible.find(template => template.dataset.kind === 'coffee');
         const featuredNode = featured && clone(featured);
         featuredContainer.replaceChildren(...(featuredNode ? [featuredNode] : []));
         empty.hidden = !!featured;
-        list.replaceChildren(...active.filter(template => template !== featured).map(template => {
+        list.replaceChildren(...visible.filter(template => template !== featured).map(template => {
           const item = document.createElement('li');
           item.className = 'border-t border-line';
           const entry = clone(template);
