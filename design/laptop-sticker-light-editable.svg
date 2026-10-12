@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="101.6mm" height="63.22mm" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">The Friday Commit, Charlotte Code &amp; Coffee light laptop sticker</title>
+  <desc id="desc">The Friday Commit in large pink and charcoal lettering on off-white with a purple terminal cursor and the original terminal mug. Code &amp; Coffee below. fridaycommit.dev.</desc>
+  <!-- Transparent corners. The pale purple silhouette is the intended finished sticker edge. -->
+  <rect x="8" y="8" width="884" height="544" rx="40" fill="#C8BEDA"/>
+  <rect x="18" y="18" width="864" height="524" rx="31" fill="#FAF9F6"/>
+  <g font-family="Liberation Mono, monospace">
+    <text x="60" y="97" font-size="42" fill="#282A36">The</text>
+    <text x="55" y="211" font-size="100" font-weight="700" fill="#AD216F">Friday</text>
+    <text x="55" y="312" font-size="100" font-weight="700" fill="#282A36">Commit<tspan fill="#7545B9">_</tspan></text>
+    <text x="60" y="398" font-size="29" fill="#08748D"><tspan fill="#AD216F">&gt;</tspan> coffee <tspan fill="#7545B9">--with</tspan> engineers</text>
+    <text x="60" y="494" font-size="26" font-weight="700" fill="#AD216F">Code <tspan fill="#7545B9">&amp;</tspan><tspan fill="#282A36"> Coffee</tspan></text>
+    <text x="590" y="494" font-size="26" fill="#282A36">fridaycommit.dev</text>
+  </g>
+  <!-- Original hand-authored mug paths, enlarged without a surrounding badge. -->
+  <g transform="translate(605 133) scale(2.05)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13 30 H72 V64 Q72 83 54 83 H31 Q13 83 13 64 Z M72 40 H82 Q101 40 94 59 Q89 69 74 67" stroke="#282A36" stroke-width="5"/>
+    <path d="M28 20 Q17 11 29 3 M50 20 Q39 11 51 3" stroke="#7545B9" stroke-width="5"/>
+    <path d="M30 52 L39 60 L30 68 M49 68 H62" stroke="#AD216F" stroke-width="4"/>
+  </g>
+  <path d="M60 443 H840" stroke="#C8BEDA" stroke-width="2"/>
+</svg>
