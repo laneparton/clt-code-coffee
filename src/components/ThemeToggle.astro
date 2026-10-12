@@ -1,7 +1,7 @@
-<button class="theme-toggle" type="button" aria-label="Switch to light theme" hidden>
-  <span class="thumb" aria-hidden="true"></span>
-  <svg class="sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4L19 5" /></svg>
-  <svg class="moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.4A9 9 0 0 1 9.6 3.6a9 9 0 1 0 10.8 10.8Z" /></svg>
+<button class="theme-toggle group relative inline-flex h-11 w-[76px] flex-none cursor-pointer items-center justify-around rounded-[24px] border border-line bg-panel p-1 text-muted hover:border-purple focus-visible:outline-3 focus-visible:outline-cyan focus-visible:outline-offset-4 max-[600px]:col-start-2 max-[600px]:row-start-1" type="button" aria-label="Switch to light theme" hidden>
+  <span class="absolute top-1 left-1 size-[34px] rounded-full bg-bg shadow-[0_1px_4px_#0003] transition-transform duration-180 ease-[ease] group-data-[current-theme=dark]:translate-x-8 motion-reduce:transition-none" aria-hidden="true"></span>
+  <svg class="relative z-1 flex-none group-data-[current-theme=light]:text-purple" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4L19 5" /></svg>
+  <svg class="relative z-1 flex-none group-data-[current-theme=dark]:text-purple" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.4A9 9 0 0 1 9.6 3.6a9 9 0 1 0 10.8 10.8Z" /></svg>
 </button>
 
 <script>
@@ -27,15 +27,3 @@
   systemTheme.addEventListener('change', sync);
   sync();
 </script>
-
-<style>
-  .theme-toggle{position:relative;display:inline-flex;align-items:center;justify-content:space-around;width:76px;height:44px;padding:4px;border:1px solid var(--line);border-radius:24px;background:var(--panel);color:var(--muted);cursor:pointer;flex:none}
-  .thumb{position:absolute;top:4px;left:4px;width:34px;height:34px;border-radius:50%;background:var(--bg);box-shadow:0 1px 4px #0003;transition:transform .18s ease}
-  .theme-toggle svg{position:relative;z-index:1;flex:none}
-  .theme-toggle[data-current-theme=dark] .thumb{transform:translateX(32px)}
-  .theme-toggle[data-current-theme=dark] .moon,.theme-toggle[data-current-theme=light] .sun{color:var(--purple)}
-  .theme-toggle:hover{border-color:var(--purple)}
-  .theme-toggle:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
-  @media(max-width:600px){.theme-toggle{grid-column:2;grid-row:1}}
-  @media(prefers-reduced-motion:reduce){.thumb{transition:none}}
-</style>

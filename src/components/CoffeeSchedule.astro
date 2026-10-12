@@ -10,22 +10,22 @@ const remaining = active.filter(entry => entry !== featured);
 const signature = active.map(entry => entry.date).join(',');
 ---
 <div class="coffee-schedule" data-signature={signature}>
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy">
+  <section class="grid grid-cols-[1.15fr_1fr] gap-x-12 gap-y-8 pt-12 pb-9 max-[950px]:grid-cols-1 max-[950px]:gap-6 max-[950px]:pt-8" aria-labelledby="hero-title">
+    <div class="min-w-0">
       <slot />
-      <pre class="signature" role="group" aria-label="Signature command"><code><span aria-hidden="true">&gt;</span> coffee <span class="purple">--with</span> engineers</code></pre>
+      <pre class="mt-6 mb-0 w-fit max-w-full overflow-x-auto rounded-md bg-panel px-5 py-4 font-mono text-[16px] leading-[1.5] text-cyan" role="group" aria-label="Signature command"><code class="font-[inherit]"><span class="mr-2 text-pink" aria-hidden="true">&gt;</span> coffee <span class="text-purple">--with</span> engineers</code></pre>
     </div>
-    <section class="next-coffee" id="next-coffee" aria-labelledby="coffee-title">
-      <h2 id="coffee-title">Next coffee</h2>
-      <div class="featured-entry">{featured && <CoffeeEntry entry={featured} timezone={config.timezone} />}</div>
-      <p class="schedule-empty" hidden={!!featured}>Next date to be announced.</p>
-      <noscript><p class="schedule-as-of">Schedule as of {now.toLocaleDateString('en-US', { timeZone: config.timezone, month: 'long', day: 'numeric', year: 'numeric' })}.</p></noscript>
+    <section class="min-w-0 scroll-mt-6 rounded-lg border border-line border-t-3 border-t-purple bg-panel p-7 max-[600px]:p-[22px]" id="next-coffee" aria-labelledby="coffee-title">
+      <h2 id="coffee-title" class="mt-0 mb-[22px] font-mono text-[15px] leading-[normal] font-semibold text-cyan max-[600px]:mb-4">Next coffee</h2>
+      <div class="featured-entry group/featured">{featured && <CoffeeEntry entry={featured} timezone={config.timezone} />}</div>
+      <p class="schedule-empty m-0 text-muted" hidden={!!featured}>Next date to be announced.</p>
+      <noscript><p class="mt-5 mb-0 text-[14px] text-muted">Schedule as of {now.toLocaleDateString('en-US', { timeZone: config.timezone, month: 'long', day: 'numeric', year: 'numeric' })}.</p></noscript>
     </section>
   </section>
-  <section class="schedule-lineup" aria-labelledby="lineup-title" hidden={remaining.length === 0}>
-    <div class="section-label"><span aria-hidden="true">01 /</span> THE LINEUP</div>
-    <h2 id="lineup-title">More Fridays, more shop talk.</h2>
-    <ul class="event-list">{remaining.map(entry => <li><CoffeeEntry entry={entry} timezone={config.timezone} /></li>)}</ul>
+  <section class="schedule-lineup border-t border-line pt-9 pb-12 max-[700px]:pb-9" aria-labelledby="lineup-title" hidden={remaining.length === 0}>
+    <div class="mb-6 font-mono text-[14px] leading-[normal] font-semibold tracking-[1px] text-cyan"><span class="mr-2.5 text-purple" aria-hidden="true">01 /</span> THE LINEUP</div>
+    <h2 id="lineup-title" class="mt-0 mb-6 text-[26px] leading-[1.3] font-bold tracking-[-.7px] max-[600px]:text-[24px]">More Fridays, more shop talk.</h2>
+    <ul class="event-list group/lineup m-0 list-none p-0">{remaining.map(entry => <li class="border-t border-line"><CoffeeEntry entry={entry} timezone={config.timezone} /></li>)}</ul>
   </section>
   {entries.map(entry => <template data-date={entry.date} data-kind={entry.kind} data-end={entry.end.toISOString()}><CoffeeEntry entry={entry} timezone={config.timezone} /></template>)}
 </div>
@@ -52,6 +52,7 @@ const signature = active.map(entry => entry.date).join(',');
         empty.hidden = !!featured;
         list.replaceChildren(...active.filter(template => template !== featured).map(template => {
           const item = document.createElement('li');
+          item.className = 'border-t border-line';
           const entry = clone(template);
           item.append(entry);
           return item;
@@ -69,50 +70,3 @@ const signature = active.map(entry => entry.date).join(',');
     document.addEventListener('visibilitychange', () => { if (!document.hidden) sync(); });
   }
 </script>
-
-<style is:global>
-  .coffee-schedule .hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px 48px; padding: 48px 0 36px; }
-  .hero-copy { min-width: 0; }
-  .coffee-schedule .next-coffee { min-width: 0; background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--purple); border-radius: 8px; padding: 28px; scroll-margin-top: 24px; }
-  .next-coffee h2 { color: var(--cyan); font: 600 15px var(--mono); margin-bottom: 22px; }
-  .featured-entry .schedule-entry { display: grid; gap: 20px; }
-  .event-when time { font-size: 24px; font-weight: 700; line-height: 1.3; }
-  .event-time { color: var(--purple); font: 18px/1.5 var(--mono); margin: 6px 0 0; }
-  .event-place h3 { font-size: 21px; line-height: 1.4; margin: 0 0 6px; }
-  .event-address { color: var(--muted); font-size: 17px; line-height: 1.5; margin: 0 0 20px; }
-  .event-map { gap: 20px; font-size: 15px; }
-  .schedule-empty { margin: 0; color: var(--muted); }
-  .schedule-as-of { margin: 20px 0 0; font-size: 14px; color: var(--muted); }
-  .signature { width: fit-content; max-width: 100%; margin: 24px 0 0; padding: 16px 20px; border-radius: 6px; background: var(--panel); font: 16px/1.5 var(--mono); color: var(--cyan); overflow-x: auto; }
-  .signature code { font: inherit; }
-  .signature code > span:first-child { color: var(--pink); margin-right: 8px; }
-  .schedule-lineup { border-top: 1px solid var(--line); }
-  .schedule-lineup h2 { font-size: 26px; margin-bottom: 24px; }
-  .coffee-schedule .event-list { list-style: none; padding: 0; margin: 0; }
-  .event-list > li { border-top: 1px solid var(--line); }
-  .event-list .schedule-entry { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; padding: 20px 0; }
-  .event-list .event-when { display: grid; grid-template-columns: 220px auto; align-items: baseline; gap: 24px; }
-  .event-list .event-when time { font: 600 18px/1.5 var(--mono); color: var(--pink); }
-  .event-list .event-time { font-size: 16px; margin: 0; white-space: nowrap; }
-  .event-list .event-place h3 { font-size: 17px; margin: 0; }
-  .event-list .event-address, .event-list .event-map { display: none; }
-  .event-list .break-entry .event-when time, .break-note { color: var(--muted); }
-  .break-note h3 { font-size: 17px; margin: 0 0 4px; }
-  .break-note p { font-size: 16px; line-height: 1.5; margin: 0; }
-  @media(max-width:950px) {
-    .coffee-schedule .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 32px; }
-    .event-list .event-when { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
-  }
-  @media(max-width:600px) {
-    .coffee-schedule .next-coffee { padding: 22px; }
-    .next-coffee h2 { margin-bottom: 16px; }
-    .featured-entry .schedule-entry { gap: 16px; }
-    .event-when time { font-size: 22px; }
-    .event-place h3 { font-size: 20px; }
-    .event-list .schedule-entry { grid-template-columns: 1fr; gap: 6px; padding: 16px 0; }
-    .event-list .event-when { flex-direction: row; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .event-list .event-when time { font-size: 16px; }
-    .event-list .event-time { font-size: 15px; }
-    .schedule-lineup h2 { font-size: 24px; }
-  }
-</style>

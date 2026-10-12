@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: light-dark(#faf9f6, #282a36);
+  --color-panel: light-dark(#f3f0fa, #343746);
+  --color-text: light-dark(#282a36, #f8f8f2);
+  --color-muted: light-dark(#57566c, #cecddb);
+  --color-pink: light-dark(#ad216f, #ff79c6);
+  --color-purple: light-dark(#7545b9, #bd93f9);
+  --color-cyan: light-dark(#08748d, #8be9fd);
+  --color-line: light-dark(#c8beda, #44475a);
+  --color-button-text: light-dark(#fff, #282a36);
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+@custom-variant light {
+  &:where(html[data-theme=light] *) { @slot; }
+  @media (prefers-color-scheme: light) {
+    &:where(html:not([data-theme=dark]) *) { @slot; }
+  }
+}
+
+@layer base {
+  :root { color-scheme: light dark; }
+  :root[data-theme=light] { color-scheme: light; }
+  :root[data-theme=dark] { color-scheme: dark; }
+  a { color: inherit; text-underline-offset: 5px; }
+  a:hover { color: var(--color-pink); }
+  a:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--color-cyan);
+    outline-offset: 6px;
+  }
+  button, a, summary { -webkit-tap-highlight-color: transparent; }
+  [hidden] { display: none !important; }
+  p { margin-bottom: 18px; }
+}

@@ -4,15 +4,17 @@ const { entry, timezone } = Astro.props;
 const date = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'long', month: 'short', day: 'numeric' })
   .format(new Date(`${entry.date}T12:00:00Z`));
 ---
-<article class:list={['schedule-entry', { 'break-entry': entry.kind === 'break' }]} data-date={entry.date}>
-  <div class="event-when">
-    <time datetime={entry.date}>{date}</time>
-    {entry.kind === 'coffee' && <p class="event-time">{timeLabel(entry, timezone)}</p>}
+<article class:list={['schedule-entry grid gap-5 max-[600px]:gap-4 group-[.event-list]/lineup:grid-cols-2 group-[.event-list]/lineup:items-center group-[.event-list]/lineup:gap-4 group-[.event-list]/lineup:py-5 max-[600px]:group-[.event-list]/lineup:grid-cols-1 max-[600px]:group-[.event-list]/lineup:gap-1.5 max-[600px]:group-[.event-list]/lineup:py-4', {
+  'break-entry': entry.kind === 'break'
+}]} data-date={entry.date}>
+  <div class="group-[.event-list]/lineup:grid group-[.event-list]/lineup:grid-cols-[220px_auto] group-[.event-list]/lineup:items-baseline group-[.event-list]/lineup:gap-6 max-[950px]:group-[.event-list]/lineup:flex max-[950px]:group-[.event-list]/lineup:flex-col max-[950px]:group-[.event-list]/lineup:items-start max-[950px]:group-[.event-list]/lineup:gap-1 max-[600px]:group-[.event-list]/lineup:flex-row max-[600px]:group-[.event-list]/lineup:justify-between max-[600px]:group-[.event-list]/lineup:gap-3 max-[600px]:group-[.event-list]/lineup:flex-wrap">
+    <time class:list={["text-[24px] leading-[1.3] font-bold max-[600px]:text-[22px] group-[.event-list]/lineup:font-mono group-[.event-list]/lineup:text-[18px] group-[.event-list]/lineup:leading-[1.5] group-[.event-list]/lineup:font-semibold max-[600px]:group-[.event-list]/lineup:text-[16px]", entry.kind === 'break' ? 'text-muted' : 'group-[.event-list]/lineup:text-pink']} datetime={entry.date}>{date}</time>
+    {entry.kind === 'coffee' && <p class="mt-1.5 mb-0 font-mono text-[18px] leading-[1.5] text-purple group-[.event-list]/lineup:m-0 group-[.event-list]/lineup:text-[16px] group-[.event-list]/lineup:whitespace-nowrap max-[600px]:group-[.event-list]/lineup:text-[15px]">{timeLabel(entry, timezone)}</p>}
   </div>
-  {entry.kind === 'break' ? <div class="break-note"><h3>{entry.title}</h3><p>No coffee this Friday. {entry.message}</p></div> :
+  {entry.kind === 'break' ? <div class="text-muted"><h3 class="mt-0 mb-1 text-[17px] leading-[1.4] font-bold">{entry.title}</h3><p class="m-0 text-[16px] leading-[1.5]">No coffee this Friday. {entry.message}</p></div> :
     <div class="event-place">
-      <h3>{entry.cafe ?? 'Café to be announced'}</h3>
-      {entry.address && <p class="event-address">{entry.address}</p>}
-      {entry.mapUrl && <a class="event-map button" href={entry.mapUrl}>Open the map <span aria-hidden="true">↗</span></a>}
+      <h3 class="mt-0 mb-1.5 text-[21px] leading-[1.4] font-bold max-[600px]:text-[20px] group-[.event-list]/lineup:m-0 group-[.event-list]/lineup:text-[17px]">{entry.cafe ?? 'Café to be announced'}</h3>
+      {entry.address && <p class="mt-0 mb-5 text-[17px] leading-[1.5] text-muted group-[.event-list]/lineup:hidden">{entry.address}</p>}
+      {entry.mapUrl && <a class="inline-flex items-center gap-7 rounded-[5px] bg-purple px-5 py-[15px] font-mono text-[16px] leading-[normal] font-bold text-button-text no-underline hover:bg-pink hover:text-button-text group-[.event-list]/lineup:hidden max-[370px]:gap-4 max-[370px]:px-4 max-[370px]:text-[15px]" href={entry.mapUrl}>Open the map <span aria-hidden="true">↗</span></a>}
     </div>}
 </article>

@@ -36,3 +36,9 @@ Add only verified, organizer-approved entries to `communityLinks`, with `label` 
 The compact SVGs have transparent outer backgrounds for use on the page. The header uses the supplied mug paths with a compact text wordmark. A sun/moon toggle follows the system theme until changed and saves a manual preference in local browser storage. Both the page and compact mark follow that choice. If storage is unavailable, the toggle still works for the current visit.
 
 The SVGs retain text nodes and local monospace font fallbacks. Outline the text in a licensed font before production printing. No external fonts, generated images, analytics, backend, or registration system are included.
+
+## Styling
+
+Tailwind CSS v4 runs through `@tailwindcss/vite`. Component markup owns layout, spacing, typography, and interaction styles. `src/styles/global.css` defines shared Dracula theme colors, fonts, the light-theme variant, and base accessibility rules. Native `light-dark()` colors follow the system or the saved theme. The same event markup uses named Tailwind groups for featured cards and lineup rows, including events promoted by the schedule script.
+
+The original design is saved in Git at the `before-tailwind` tag.
