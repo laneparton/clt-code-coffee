@@ -27,6 +27,8 @@ The build orders the lineup by date and leads with the earliest coffee listing. 
 
 Rebuild after schedule edits. The page displays the next four Fridays total, including the featured coffee and any breaks. Later dates stay in the editable metadata and hidden templates, and enter the visible lineup as earlier dates expire. The static page includes templates for all explicit dates. A browser script removes expired rows and promotes the next coffee on page load, at each end time, and when the tab regains focus or visibility. Eastern daylight saving changes are included. Breaks expire at local midnight. After the last date, the page shows 'Next date to be announced' and hides the lineup. It does not generate new dates or fetch a schedule. With JavaScript disabled, the build-time schedule remains visible with an 'as of' date until rebuilt.
 
+The featured coffee has an Add to calendar download. Static `/calendar/YYYY-MM-DD.ics` files use the same schedule entries as the page and contain one event with UTC start/end times, venue, and arrival instructions. Breaks, cancellations, and date-only listings do not generate calendar files. The download link advances with the featured event. Rebuild after changing details; downloaded calendar entries are snapshots and do not receive automatic updates. Venue names link directly to the configured map URL.
+
 Add only verified, organizer-approved entries to `communityLinks`, with `label` and `url`. The page omits community links when the list is empty. No domain or group affiliation is configured.
 
 ## Branding
