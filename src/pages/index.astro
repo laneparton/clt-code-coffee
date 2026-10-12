@@ -41,7 +41,7 @@ const links = meetup.communityLinks.map(link => ({ ...link, url: safeUrl(link.ur
     <div class="mx-auto max-w-[1120px] px-12 max-[700px]:px-[22px]">
       <header class="flex items-center justify-between gap-6 border-b border-line py-6 max-[700px]:gap-4 max-[700px]:py-[18px] max-[600px]:grid max-[600px]:grid-cols-[1fr_auto] max-[600px]:gap-y-[18px]">
         <a class="block no-underline max-[600px]:col-start-1 max-[600px]:row-start-1" href="#" aria-label="Charlotte Code & Coffee home"><Brand /></a>
-        <div class="flex items-center gap-6 max-[700px]:gap-4 max-[600px]:contents"><nav class="font-mono text-[15px] leading-[normal] whitespace-nowrap max-[600px]:col-start-1 max-[600px]:row-start-2" aria-label="Main navigation"><a class="no-underline" href="#next-coffee">Next coffee <span class="ml-2 text-pink" aria-hidden="true">↗</span></a></nav><ThemeToggle /></div>
+        <div class="flex items-center gap-6 max-[700px]:gap-4 max-[600px]:contents"><nav class="font-mono text-[15px] leading-[normal] whitespace-nowrap max-[600px]:hidden" aria-label="Main navigation"><a class="no-underline" href="#next-coffee">Next coffee <span class="ml-2 text-pink" aria-hidden="true">↗</span></a></nav><ThemeToggle /></div>
       </header>
       <main id="main">
         <CoffeeSchedule config={meetup}>
